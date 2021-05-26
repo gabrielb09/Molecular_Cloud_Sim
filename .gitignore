@@ -1,0 +1,7 @@
+Cloud_Build/*
+!Cloud_Build/.gitkeep
+
+output/*
+!output/.gitkeep
+
+**.DS_Store

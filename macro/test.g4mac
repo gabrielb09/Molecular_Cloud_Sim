@@ -1,0 +1,31 @@
+# set run verbosity
+/run/verbose 1
+/tracking/verbose 1
+/event/verbose 1
+
+
+# define general particle source
+
+# particle type
+/gps/particle proton
+
+# source geometry
+/gps/pos/type Point
+/gps/pos/centre 0 0 3.1 pc
+
+# source direction/angle
+/gps/ang/type focused
+/gps/ang/focuspoint 0 0 0 km
+
+# source energy distribution
+/gps/ene/type Pow
+/gps/ene/min 1 TeV
+/gps/ene/max 100 TeV
+/gps/ene/alpha -2
+
+# output
+/OutputDirectory ../output
+/OutputFile test_sim
+
+# run
+/run/beamOn 1
