@@ -1,21 +1,33 @@
 #ifndef CloudField_h
 #define CloudField_h 1
 
-#include "globals.hh"
-#include "G4ElectroMagneticField.hh"
+#include "G4UniformMagField.hh"
+#include "G4FieldManager.hh"
+#include "G4ChordFinder.hh"
+#include "G4TransportationManager.hh"
+#include "G4Mag_UsualEqRhs.hh"
+#include "G4HelixImplicitEuler.hh"
+#include "G4IntegrationDriver.hh"
 
-class CloudField : public G4ElectroMagneticField
+#include "G4SystemOfUnits.hh"
+#include "G4ThreeVector.hh"
+
+class CloudField
 {
 
 public:
-  CloudField(G4double);
+  CloudField();
   virtual ~CloudField();
 
-  G4double B_mag;
-
-  virtual G4bool DoesFieldChangeEnergy() const { return true; };
-
-  virtual void GetFieldValue(const G4double Point[4], G4double* Bfield) const;
+  void SetFieldValue(G4ThreeVector fieldVector);
+  
+protected:
+  G4FieldManager* GetGlobalFieldManager();
+  G4MagneticField* fMagneticField;
+  G4SDManager* DetectorManager;
+  G4FieldManager* FieldManager;
+  G4Mag_UsualEqRhs* eqOM;
+  G4ChordFinder* chordFinder;
 
 };
 

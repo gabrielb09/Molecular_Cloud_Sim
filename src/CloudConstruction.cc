@@ -10,7 +10,6 @@
 #include "CloudConstruction.hh"
 #include "CloudMessenger.hh"
 #include "CloudField.hh"
-#include "global.h"
 
 #include "G4Material.hh"
 #include "G4NistManager.hh"
@@ -47,7 +46,7 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 // constructor method
 CloudConstruction::CloudConstruction()
-:SolidWorld(0),LogicalWorld(0),PhysicalWorld(0)
+:SolidWorld(0), LogicalWorld(0), PhysicalWorld(0), MagField(0)
 {
   diameter = 6.0*pc;
   column_density = 9e22/cm2;
@@ -65,6 +64,7 @@ CloudConstruction::CloudConstruction()
 CloudConstruction::~CloudConstruction()
 {
   delete cloudMessenger;
+  delete MagField;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -100,10 +100,7 @@ void CloudConstruction::DefineMaterials()
 
 G4VPhysicalVolume* CloudConstruction::Construct()
 {
-  G4GeometryManager::GetInstance()->SetWorldMaximumExtent(diameter);
-	extern global_struct global;
-  overlap = global.CheckOverlap;
-
+  G4GeometryManager::GetInstance()->SetWorldMaximumExtent(diameter*1.1);
   //------------------------------------------------
   // Copy Numbers
   //------------------------------------------------
@@ -132,11 +129,12 @@ G4VPhysicalVolume* CloudConstruction::Construct()
     //------------------------------------------------
     // Visualization attributes
     //------------------------------------------------
-    WorldVisAtt =       new G4VisAttributes(G4Colour(1.00, 1.00, 1.00, 0.0));
-    CloudVisAtt =       new G4VisAttributes(G4Colour(0.7, 0.7, 0.7, 0.5));
+    WorldVisAtt = new G4VisAttributes(G4Colour(1.00, 1.00, 1.00, 0.0));
+    CloudVisAtt = new G4VisAttributes(G4Colour(0.7, 0.7, 0.7, 0.5));
 
     LogicalWorld -> SetVisAttributes(WorldVisAtt);
     LogicalCloud -> SetVisAttributes(CloudVisAtt);
+
 
     G4double maxStep, maxLength, maxTime, minEkin;
     LogicalCloud -> SetUserLimits(new G4UserLimits(maxStep = DBL_MAX,
@@ -145,37 +143,6 @@ G4VPhysicalVolume* CloudConstruction::Construct()
                                                minEkin = 1.0*keV));
 
 	return PhysicalWorld;
-}
-
-void CloudConstruction::SetDiameter(G4double diam){
-  diameter = diam;
-  if ( G4StateManager::GetStateManager()->GetCurrentState() != G4State_PreInit ) {
-    G4RunManager::GetRunManager()->ReinitializeGeometry();
-  }
-}
-void CloudConstruction::SetColumnDensity(G4double colDen){
-  column_density = colDen;
-  if ( G4StateManager::GetStateManager()->GetCurrentState() != G4State_PreInit ) {
-    G4RunManager::GetRunManager()->ReinitializeGeometry();
-  }
-}
-void CloudConstruction::SetDensity(G4double den){
-  density = den;
-  if ( G4StateManager::GetStateManager()->GetCurrentState() != G4State_PreInit ) {
-    G4RunManager::GetRunManager()->ReinitializeGeometry();
-  }
-}
-void CloudConstruction::SetTemperature(G4double temp){
-  temperature = temp;
-  if ( G4StateManager::GetStateManager()->GetCurrentState() != G4State_PreInit ) {
-    G4RunManager::GetRunManager()->ReinitializeGeometry();
-  }
-}
-void CloudConstruction::SetPressure(G4double press){
-  pressure = press;
-  if ( G4StateManager::GetStateManager()->GetCurrentState() != G4State_PreInit ) {
-    G4RunManager::GetRunManager()->ReinitializeGeometry();
-  }
 }
 
 void CloudConstruction::ConstructSDandField()
@@ -191,6 +158,34 @@ void CloudConstruction::ConstructSDandField()
   }
 
   // Magnetic Field
+  G4TransportationManager::GetTransportationManager()->GetPropagatorInField()->SetLargestAcceptableStep(diameter*10.0);
+  // generate field
+  MagField = new CloudField(diameter);
+}
+
+void CloudConstruction::SetDiameter(G4double diam){
+  diameter = diam;
+  if ( G4StateManager::GetStateManager()->GetCurrentState() != G4State_PreInit ) {
+    G4RunManager::GetRunManager()->ReinitializeGeometry();
+  }
+}
+void CloudConstruction::SetColumnDensity(G4double colDen){
+  column_density = colDen;
+  if ( G4StateManager::GetStateManager()->GetCurrentState() != G4State_PreInit ) {
+    G4RunManager::GetRunManager()->ReinitializeGeometry();
+  }
+}
+void CloudConstruction::SetTemperature(G4double temp){
+  temperature = temp;
+  if ( G4StateManager::GetStateManager()->GetCurrentState() != G4State_PreInit ) {
+    G4RunManager::GetRunManager()->ReinitializeGeometry();
+  }
+}
+void CloudConstruction::SetPressure(G4double press){
+  pressure = press;
+  if ( G4StateManager::GetStateManager()->GetCurrentState() != G4State_PreInit ) {
+    G4RunManager::GetRunManager()->ReinitializeGeometry();
+  }
 }
 
 void CloudConstruction::UpdateGeometry()

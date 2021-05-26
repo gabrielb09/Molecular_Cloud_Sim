@@ -111,6 +111,7 @@ class CloudConstruction : public G4VUserDetectorConstruction
     G4VisAttributes* CloudVisAtt;
 
     G4SDManager* DetectorManager;
+    CloudField* MagField;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
