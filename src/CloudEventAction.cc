@@ -7,15 +7,10 @@
 //includes
 // user headers
 #include "CloudEventAction.hh"
-#include "CloudAnalysis.hh"
-#include "global.h"
 // geant headers
 #include "G4Event.hh"
 #include "G4EventManager.hh"
-#include "G4TrajectoryContainer.hh"
-#include "G4Trajectory.hh"
 #include "G4ios.hh"
-#include <unistd.h>
 
 
 CloudEventAction::CloudEventAction()
@@ -29,10 +24,7 @@ CloudEventAction::~CloudEventAction()
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void CloudEventAction::BeginOfEventAction(const G4Event* evt)
-{
-  extern global_struct global;
-  global.eventID = evt -> GetEventID();
-}
+{}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 

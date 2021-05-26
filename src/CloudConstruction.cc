@@ -56,8 +56,6 @@ CloudConstruction::CloudConstruction()
 	cloudMessenger = new CloudMessenger(this);
   // define materials
   DefineMaterials();
-
-  extern global_struct global;
 }
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 // destructor method
@@ -87,9 +85,7 @@ void CloudConstruction::DefineMaterials()
     density = column_density/diameter;
     density *= 2.0*Hyd->GetAtomicMassAmu()*1.66053906660e-27*kg;
 
-    idealConst = 8.314e1*cm3*bar/kelvin;
-
-    pressure = density*temperature*idealConst/mole;
+    ComputePressure();
 
     MolecularHydrogen = new G4Material("H_Cloud", density, nel = 1, kStateGas, temperature, pressure);
     MolecularHydrogen -> AddElement(Hyd, 2);
@@ -181,8 +177,16 @@ void CloudConstruction::SetTemperature(G4double temp){
     G4RunManager::GetRunManager()->ReinitializeGeometry();
   }
 }
+
 void CloudConstruction::SetPressure(G4double press){
   pressure = press;
+  if ( G4StateManager::GetStateManager()->GetCurrentState() != G4State_PreInit ) {
+    G4RunManager::GetRunManager()->ReinitializeGeometry();
+  }
+}
+
+void CloudConstruction::ComputePressure(){
+  pressure = density*temperature*idealConst/mole;
   if ( G4StateManager::GetStateManager()->GetCurrentState() != G4State_PreInit ) {
     G4RunManager::GetRunManager()->ReinitializeGeometry();
   }

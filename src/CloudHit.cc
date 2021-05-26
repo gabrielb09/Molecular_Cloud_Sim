@@ -7,7 +7,6 @@
 // includes
 //user header
 #include "CloudHit.hh"
-#include "global.h"
 #include "CloudAnalysis.hh"
 // Geant Visualization
 #include "G4VVisManager.hh"
@@ -28,19 +27,19 @@ CloudHit::~CloudHit() {}
 CloudHit::CloudHit(const CloudHit& right):
 	G4VHit()
 {
-	particleID_   		= right.particleID_;
+	particleID_   	= right.particleID_;
 	copyN_					=right.copyN_;
-	energy_       		= right.energy_;
-	pos_							= right.pos_;
+	energy_       	= right.energy_;
+	pos_						= right.pos_;
 
 }
 
 const CloudHit& CloudHit::operator=(const CloudHit& right)
 {
-	particleID_   		= right.particleID_;
+	particleID_   	= right.particleID_;
 	copyN_					=right.copyN_;
-	energy_       		= right.energy_;
-	pos_							= right.pos_;
+	energy_       	= right.energy_;
+	pos_						= right.pos_;
 
   return *this;
 }
@@ -73,7 +72,6 @@ void CloudHit::Print()
 
 void CloudHit::fPrint()
 {
-  extern global_struct global;
 
 	auto analysisManager = G4AnalysisManager::Instance();
 

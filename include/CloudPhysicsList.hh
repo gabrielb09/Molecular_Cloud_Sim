@@ -2,7 +2,6 @@
 #define CloudPhysicsList_H 1
 
 #include "G4VModularPhysicsList.hh"
-#include "globals.hh"
 
 class CloudPhysicsList: public G4VModularPhysicsList
 {

@@ -1,13 +1,9 @@
 #include "CloudRunAction.hh"
-#include "CloudAnalysis.hh"
+#include "RunMessenger.hh"
 
 #include "G4Run.hh"
 #include "G4RunManager.hh"
-#include "G4UnitsTable.hh"
-#include "G4SystemOfUnits.hh"
 #include "g4root.hh"
-#include "global.h"
-#include <fstream>
 
 using namespace std;
 
@@ -17,6 +13,7 @@ using namespace std;
 CloudRunAction::CloudRunAction()
 : G4UserRunAction()
 {
+  runMessenger = new RunMessenger(this);
 
   auto analysisManager = G4AnalysisManager::Instance();
 
@@ -43,13 +40,12 @@ CloudRunAction::~CloudRunAction()
 
 void CloudRunAction::BeginOfRunAction(const G4Run* aRun)
 {
-  extern global_struct global;
+
+  G4cout << "### Run start." << G4endl;
+
   char fname[100];
+  sprintf(fname, "%s/%s.root", outdir.c_str(), outfile.c_str());
 
-  ((G4Run *)(aRun))->SetRunID(global.runnum);
-  G4cout << "### Run " << aRun->GetRunID() << " start." << G4endl;
-
-  sprintf(fname, "%s/%s.root", global.outdir, global.outfile );
   G4cout << "Output file: " << fname << G4endl;
 
   auto analysisManager = G4AnalysisManager::Instance();
@@ -62,12 +58,10 @@ void CloudRunAction::BeginOfRunAction(const G4Run* aRun)
 
 void CloudRunAction::EndOfRunAction(const G4Run*)
 {
-	extern global_struct global;
-
 	auto analysisManager = G4AnalysisManager::Instance();
 
-  analysisManager->Write();
-  analysisManager->CloseFile();
+  analysisManager -> Write();
+  analysisManager -> CloseFile();
 
 	G4cout << "Run end  " << G4endl;
 }

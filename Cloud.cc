@@ -9,22 +9,14 @@
 #include "G4UIterminal.hh"
 #include "G4UItcsh.hh"
 
-//#include "QGSP.hh"
 #include "QGSP_BERT.hh"
 #include "QGSP_BERT_HP.hh"
 #include "QGSP_BIC.hh"
 #include "QGSP_BIC_HP.hh"
-//#include "LHEP_BERT.hh"
 #include "Shielding.hh"
 #include "G4SystemOfUnits.hh"
 
-//#ifdef G4VIS_USE
 #include "G4VisExecutive.hh"
-//#endif
-#include "global.h"
-
-
-global_struct global;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 

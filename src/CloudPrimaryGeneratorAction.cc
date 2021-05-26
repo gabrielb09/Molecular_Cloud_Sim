@@ -13,11 +13,9 @@
 #include "G4ParticleGun.hh"
 #include "G4ParticleTable.hh"
 #include "G4ParticleDefinition.hh"
-#include "globals.hh"
 #include "G4ThreeVector.hh"
 #include "Randomize.hh"
 #include <math.h>
-#include "global.h"
 #include "G4SystemOfUnits.hh"
 //#include "Randomize.hh"
 
@@ -42,5 +40,5 @@ CloudPrimaryGeneratorAction::~CloudPrimaryGeneratorAction()
 void CloudPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
 	extern global_struct global;
-  GeneralParticleSource->GeneratePrimaryVertex(anEvent);
+  GeneralParticleSource -> GeneratePrimaryVertex(anEvent);
 }

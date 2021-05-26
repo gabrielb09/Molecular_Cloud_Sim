@@ -20,7 +20,7 @@ public:
   virtual ~CloudField();
 
   void SetFieldValue(G4ThreeVector fieldVector);
-  
+
 protected:
   G4FieldManager* GetGlobalFieldManager();
   G4MagneticField* fMagneticField;
@@ -28,6 +28,7 @@ protected:
   G4FieldManager* FieldManager;
   G4Mag_UsualEqRhs* eqOM;
   G4ChordFinder* chordFinder;
+  FieldMessenger* fieldMessenger;
 
 };
 

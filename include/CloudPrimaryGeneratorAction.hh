@@ -5,10 +5,6 @@
 
 class ConstructCloud;
 class G4GeneralParticleSource;
-class G4SPSPosDistribution;
-class G4SPSAngDistribution;
-class G4SPSEneDistribution;
-class G4ParticleGun;
 class G4Event;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

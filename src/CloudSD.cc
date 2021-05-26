@@ -7,7 +7,6 @@
 //includes
 // user headers
 #include "CloudSD.hh"
-#include "global.h"
 // geant headers
 #include "G4HCofThisEvent.hh"
 #include "G4Step.hh"
@@ -40,7 +39,6 @@ void CloudSD::Initialize(G4HCofThisEvent* HCE)
 
 G4bool CloudSD::ProcessHits(G4Step* step,G4TouchableHistory*)
 {
-  extern global_struct global;
 
   CloudHit* newHit = new CloudHit();
 
@@ -62,17 +60,16 @@ G4bool CloudSD::ProcessHits(G4Step* step,G4TouchableHistory*)
 
 void CloudSD::EndOfEvent(G4HCofThisEvent*)
 {
-	extern global_struct global;
-  NbHits = DetectorCollection->entries();
-  for(G4int i=0; i<NbHits; i++ )
+  NbHits = DetectorCollection -> entries();
+  for(G4int i = 0; i<NbHits; i++ )
   {
-    (*DetectorCollection)[i]->fPrint();
+    (*DetectorCollection)[i] -> fPrint();
   }
 
   if (verboseLevel > 1)
   {
     G4cout << "\n-------->Hits Collection: in this event there are " << NbHits
 		<< " hits in the NaI: " << G4endl;
-    for (G4int i=0;i<NbHits;i++) (*DetectorCollection)[i]->Print();
+    for (G4int i=0;i<NbHits;i++) (*DetectorCollection)[i] -> Print();
   }
 }

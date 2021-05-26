@@ -1,39 +1,9 @@
-//
-// ********************************************************************
-// * License and Disclaimer                                           *
-// *                                                                  *
-// * The  Geant4 software  is  copyright of the Copyright Holders  of *
-// * the Geant4 Collaboration.  It is provided  under  the terms  and *
-// * conditions of the Geant4 Software License,  included in the file *
-// * LICENSE and available at  http://cern.ch/geant4/license .  These *
-// * include a list of copyright holders.                             *
-// *                                                                  *
-// * Neither the authors of this software system, nor their employing *
-// * institutes,nor the agencies providing financial support for this *
-// * work  make  any representation or  warranty, express or implied, *
-// * regarding  this  software system or assume any liability for its *
-// * use.  Please see the license in the file  LICENSE  and URL above *
-// * for the full disclaimer and the limitation of liability.         *
-// *                                                                  *
-// * This  code  implementation is the result of  the  scientific and *
-// * technical work of the GEANT4 collaboration.                      *
-// * By using,  copying,  modifying or  distributing the software (or *
-// * any work based  on the software)  you  agree  to acknowledge its *
-// * use  in  resulting  scientific  publications,  and indicate your *
-// * acceptance of all terms of the Geant4 Software license.          *
-// ********************************************************************
-//
-//
-// $Id: LabDetectorConstruction.hh,v 1.8 2006/06/29 17:47:30 gunter Exp $
-// GEANT4 tag $Name: geant4-09-00 $
-//
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 #ifndef CloudConstruction_h
 #define CloudConstruction_h 1
 
-#include "globals.hh"
 #include "CloudSD.hh"
 #include "CloudField.hh"
 
@@ -75,22 +45,14 @@ class CloudConstruction : public G4VUserDetectorConstruction
   void SetDensity(G4double);
   void SetTemperature(G4double);
   void SetPressure(G4double);
-
-  void ToggleField(){fieldOn = true;};
-  void SetFieldStrength(G4double bmag){B_mag = bmag;};
-
-  void SetMinSteps(G4int minStep){min_steps = minStep;};
-  void SetMaxSteps(G4int maxStep){max_steps = maxStep;};
+  void ComputePressure();
 
   private:
 
-    G4double diameter, column_density, density, temperature, B_mag;
-    G4double idealConst, pressure;
-    G4int min_steps, max_steps;
-    G4int overlap;
+    const G4double idealConst = 8.314e1*cm3*bar/kelvin;
+
+    G4double diameter, column_density, density, temperature, B_mag, pressure;
     G4int CopyWorld, CopyCloud;
-    G4double minStepLen;
-    G4bool fieldOn = false;
 
     G4Box*              SolidWorld;
     G4LogicalVolume*    LogicalWorld;
