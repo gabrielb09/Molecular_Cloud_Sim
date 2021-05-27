@@ -3,7 +3,7 @@
 
 #include "G4UImessenger.hh"
 
-class CloudConstruction;
+class CloudRunAction;
 class G4UIdirectory;
 class G4UIcmdWithAString;
 
@@ -12,7 +12,7 @@ class G4UIcmdWithAString;
 class RunMessenger: public G4UImessenger
 {
   public:
-    RunMessenger(CloudConstruction*);
+    RunMessenger(CloudRunAction*);
    ~RunMessenger();
 
     void SetNewValue(G4UIcommand* command, G4String newValue);

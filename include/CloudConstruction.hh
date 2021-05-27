@@ -18,6 +18,8 @@
 #include "G4MagIntegratorStepper.hh"
 #include "G4ChordFinder.hh"
 
+#include "G4SystemOfUnits.hh"
+
 class G4Box;
 class G4Sphere;
 class G4Material;

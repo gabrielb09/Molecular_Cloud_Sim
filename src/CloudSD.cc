@@ -14,6 +14,7 @@
 #include "G4SDManager.hh"
 #include "G4VProcess.hh"
 #include "G4ios.hh"
+#include "G4SystemOfUnits.hh"
 
 CloudSD::CloudSD(G4String name)
 :G4VSensitiveDetector(name)
@@ -31,8 +32,8 @@ CloudSD::~CloudSD(){ }
 void CloudSD::Initialize(G4HCofThisEvent* HCE)
 {
   DetectorCollection = new CloudHitsCollection(SensitiveDetectorName,collectionName[0]);
-  auto hcID = G4SDManager::GetSDMpointer()->GetCollectionID(collectionName[0]);
-  HCE->AddHitsCollection( hcID, DetectorCollection );
+  auto hcID = G4SDManager::GetSDMpointer() -> GetCollectionID(collectionName[0]);
+  HCE -> AddHitsCollection( hcID, DetectorCollection );
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -43,6 +44,7 @@ G4bool CloudSD::ProcessHits(G4Step* step,G4TouchableHistory*)
   CloudHit* newHit = new CloudHit();
 
   newHit -> SetParticleID(step -> GetTrack() -> GetDynamicParticle() -> GetDefinition() -> GetPDGEncoding());
+  newHit -> SetStepNumber(step -> GetTrack() -> GetCurrentStepNumber());
   newHit -> SetCopyN(step -> GetPostStepPoint() -> GetTouchableHandle() -> GetCopyNumber());
   newHit -> SetEnergy(step -> GetPreStepPoint() -> GetKineticEnergy());
   newHit -> SetPos(step -> GetPostStepPoint() -> GetPosition());

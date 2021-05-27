@@ -24,7 +24,7 @@ FieldMessenger::FieldMessenger(CloudField* myfield)
   // B field vector
   BVecCmd = new G4UIcmdWith3VectorAndUnit("/Bfield/vector", this);
   BVecCmd -> SetGuidance("Magnetic Field Vector");
-  BVecCmd -> SetParameterName("BVec", true);
+  BVecCmd -> SetParameterName("Bx", "By", "Bz", true);
   BVecCmd -> SetUnitCategory("Magnetic flux density");
 
 }

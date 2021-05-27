@@ -1,6 +1,6 @@
 // user headers
 #include "RunMessenger.hh"
-#include "CloudConstruction.hh"
+#include "CloudRunAction.hh"
 // Geant headers
 #include "G4UIcmdWithAString.hh"
 

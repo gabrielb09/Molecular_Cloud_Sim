@@ -30,19 +30,25 @@ class CloudHit : public G4VHit
 		void fPrint();
 
   public:
-  	void SetParticleID  	(G4int pID)      	{ particleID_ = pID; };
-    void SetCopyN   		  (G4int cpyN)     { copyN_ = cpyN; };
-    void SetEnergy      	(G4double e)	  { energy_ = e; };
-    void SetPos      	    (G4ThreeVector xyz)	  { pos_ = xyz; };
+  	void SetParticleID  	(G4int pID)      	  { particleID_ = pID; };
+    void SetStepNumber  	(G4int stepN)      	  { stepNumber_ = stepN; };
+    void SetCopyN   		  (G4int cpyN)        { copyN_ = cpyN; };
+    void SetEnergy      	(G4double e)	      { energy_ = e; };
+    void SetPos      	    (G4ThreeVector xyz) { pos_ = xyz; };
+    void SetTime      	  (G4double t)        { time_ = t; };
+    void SetMomentum      (G4ThreeVector p)   { momentum_ = p; };
 
     G4int    GetParticleID ()   { return particleID_; };
     G4double GetEnergy     ()	  { return energy_; };
 
   private:
     G4int        	particleID_;
+    G4int         stepNumber_;
     G4int         copyN_;
     G4double      energy_;
     G4ThreeVector pos_;
+    G4double      time_;
+    G4ThreeVector momentum_;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

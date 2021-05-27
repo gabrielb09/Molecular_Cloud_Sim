@@ -9,11 +9,6 @@
 #include "G4UIterminal.hh"
 #include "G4UItcsh.hh"
 
-#include "QGSP_BERT.hh"
-#include "QGSP_BERT_HP.hh"
-#include "QGSP_BIC.hh"
-#include "QGSP_BIC_HP.hh"
-#include "Shielding.hh"
 #include "G4SystemOfUnits.hh"
 
 #include "G4VisExecutive.hh"
@@ -25,14 +20,13 @@ int main(int argc,char** argv)
   CLHEP::HepRandom::setTheSeed(time(NULL));
   // Run manager
   //
-  G4RunManager * runManager = new G4RunManager;
+  G4RunManager * runManager = new G4RunManager();
 
   // User Initialization classes (mandatory)
-  CloudConstruction* detector = new CloudConstruction;
+  CloudConstruction* detector = new CloudConstruction();
   runManager -> SetUserInitialization(detector);
 
   G4VUserPhysicsList* physics = new CloudPhysicsList();
-
 	runManager -> SetUserInitialization(physics);
 
   G4VisManager* visManager = new G4VisExecutive();
@@ -43,10 +37,10 @@ int main(int argc,char** argv)
   G4VUserPrimaryGeneratorAction* gen_action = new CloudPrimaryGeneratorAction();
   runManager -> SetUserAction(gen_action);
   //
-  G4UserRunAction* run_action = new CloudRunAction;
+  G4UserRunAction* run_action = new CloudRunAction();
   runManager -> SetUserAction(run_action);
   //
-  G4UserEventAction* event_action = new CloudEventAction;
+  G4UserEventAction* event_action = new CloudEventAction();
   runManager -> SetUserAction(event_action);
   // Initialize G4 kernel
   //

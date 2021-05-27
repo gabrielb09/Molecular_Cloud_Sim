@@ -39,6 +39,5 @@ CloudPrimaryGeneratorAction::~CloudPrimaryGeneratorAction()
 
 void CloudPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
-	extern global_struct global;
   GeneralParticleSource -> GeneratePrimaryVertex(anEvent);
 }

@@ -18,14 +18,81 @@ CloudRunAction::CloudRunAction()
   auto analysisManager = G4AnalysisManager::Instance();
 
   analysisManager -> SetVerboseLevel(1);
-  analysisManager -> SetNtupleMerging(true);
 
-  analysisManager -> CreateNtuple("CloudData", "Cloud Simulation Data");
-  analysisManager -> CreateNtupleIColumn("particleID");
-  analysisManager -> CreateNtupleIColumn("postCopyNb");
-  analysisManager -> CreateNtupleDColumn("energy");
+  // keV (id = 0)
+  analysisManager -> CreateNtuple("keV_Photons", "keV Photon Simulation Data");
 
-  analysisManager->FinishNtuple();
+  analysisManager -> CreateNtupleDColumn(0, "energy");
+  analysisManager -> CreateNtupleDColumn(0, "px");
+  analysisManager -> CreateNtupleDColumn(0, "py");
+  analysisManager -> CreateNtupleDColumn(0, "pz");
+
+  analysisManager -> CreateNtupleDColumn(0, "t");
+  analysisManager -> CreateNtupleDColumn(0, "x");
+  analysisManager -> CreateNtupleDColumn(0, "y");
+  analysisManager -> CreateNtupleDColumn(0, "z");
+
+  analysisManager -> FinishNtuple(0);
+
+  // GeV (id = 1)
+  analysisManager -> CreateNtuple("GeV_Photons", "GeV Photon Simulation Data");
+
+  analysisManager -> CreateNtupleDColumn(1, "energy");
+  analysisManager -> CreateNtupleDColumn(1, "px");
+  analysisManager -> CreateNtupleDColumn(1, "py");
+  analysisManager -> CreateNtupleDColumn(1, "pz");
+
+  analysisManager -> CreateNtupleDColumn(1, "t");
+
+  analysisManager -> FinishNtuple(1);
+
+  // TeV (id = 2)
+  analysisManager -> CreateNtuple("TeV_Photons", "TeV Photon Simulation Data");
+
+  analysisManager -> CreateNtupleDColumn(2, "energy");
+
+  analysisManager -> CreateNtupleDColumn(2, "t");
+
+  analysisManager -> FinishNtuple(2);
+
+  // electrons (id = 3)
+  analysisManager -> CreateNtuple("Electrons", "Electron Simulation Data");
+
+  analysisManager -> CreateNtupleDColumn(3, "energy");
+
+  analysisManager -> CreateNtupleDColumn(3, "t");
+  analysisManager -> CreateNtupleDColumn(3, "x");
+  analysisManager -> CreateNtupleDColumn(3, "y");
+  analysisManager -> CreateNtupleDColumn(3, "z");
+
+  analysisManager -> FinishNtuple(3);
+
+  // neutrinos (id = 4)
+  analysisManager -> CreateNtuple("Neutrinos", "Neutrino Simulation Data");
+
+  analysisManager -> CreateNtupleDColumn(4, "energy");
+
+  analysisManager -> CreateNtupleDColumn(4, "t");
+  analysisManager -> CreateNtupleDColumn(4, "px");
+  analysisManager -> CreateNtupleDColumn(4, "py");
+  analysisManager -> CreateNtupleDColumn(4, "pz");
+
+  analysisManager -> FinishNtuple(4);
+
+  // protons (id = 5)
+  analysisManager -> CreateNtuple("Protons", "Proton Simulation Data");
+
+  analysisManager -> CreateNtupleDColumn(5, "energy");
+
+  analysisManager -> FinishNtuple(5);
+
+  // other (id = 6)
+  analysisManager -> CreateNtuple("Others", "Other Simulation Data");
+
+  analysisManager -> CreateNtupleIColumn(6, "id");
+  analysisManager -> CreateNtupleDColumn(6, "energy");
+
+  analysisManager -> FinishNtuple(6);
 
 }
 

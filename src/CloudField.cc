@@ -13,9 +13,10 @@
 #include "G4SystemOfUnits.hh"
 #include "G4ThreeVector.hh"
 
-CloudField::CloudField(G4double diameter)
+CloudField::CloudField(G4double d)
 : fMagneticField(0)
 {
+  diameter = d;
   fieldMessenger = new FieldMessenger(this);
   // initialize a global uniform field with 100 uG in z direction
   fMagneticField = new G4UniformMagField(G4ThreeVector(0.0,0.0,1e-4*gauss));
