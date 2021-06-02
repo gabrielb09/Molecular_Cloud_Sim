@@ -19,24 +19,24 @@ void BinLogX(TH1*h)
 
 }
 
-int electron_spectrum(const char filename[20])
+int electron_spectrum()
 {
     gROOT -> Reset();
-    
+
     // load input files
     TChain in_files("CloudData");
     in_files.Add("../output/*large*");
-    
+
     // set binnings
-    int numBins = 9660;
-    double minE = 1e3; //eV
+    int numBins = 75;
+    double minE = 0.25; //TeV
     //double maxE = 1e13; //eV
-    double maxE = 3.22e13; //eV
-    
+    double maxE = 33.0; //TeV
+
     // make spectrum
     TH1D *spectrum = new TH1D();
     spectrum -> SetName("Spectrum");
-    spectrum -> GetXaxis() -> SetTitle("Energy [eV]");
+    spectrum -> GetXaxis() -> SetTitle("Energy [TeV]");
     spectrum -> GetYaxis() -> SetTitle("#frac{dN}{dE} [counts/eV]");
     spectrum -> GetXaxis() -> SetLabelSize(spectrum -> GetXaxis() -> GetLabelSize()*1.25);
     spectrum -> GetYaxis() -> SetLabelSize(spectrum -> GetYaxis() -> GetLabelSize()*1.25);
@@ -47,7 +47,7 @@ int electron_spectrum(const char filename[20])
 
     spectrum -> SetBins(numBins, minE, maxE);
     BinLogX(spectrum);
-    
+
     // load data
     int pID;
     double energy;
@@ -60,35 +60,35 @@ int electron_spectrum(const char filename[20])
         in_files.GetEntry(i);
 
         if(pID == 11){
-            spectrum -> Fill(energy*1e6);
+            spectrum -> Fill(energy*1e-6);
             if(energy >= max_E){
                 max_E = energy;
             }
         }
     }
-    max_E *= 1e6;
+    max_E /= 1e6;
     cout << max_E << endl;
-    
-    // scale every bin
-    
-    double bin_height, bin_width;
 
+    // scale every bin
+
+    double bin_height, bin_width;
+/*
     for(int i = 0; i <= spectrum -> GetNbinsX(); i++){
         bin_height = spectrum -> GetBinContent(i);
         bin_width = spectrum -> GetBinWidth(i);
 
         spectrum -> SetBinContent(i, bin_height/bin_width);
     }
-    
+*/
     // output file
     char outputFile[100];
     sprintf(outputFile, "%s%s", "../output/", "electron_spectrum"); // output file name
-    
+
     // save to a file
     TFile *outFile = new TFile(outputFile,"RECREATE");
     // write histograms to file
     spectrum -> Write("e_Spectrum");
-    
+
     // plot + make fig
     double s = 2.5;
     TCanvas *c1 = new TCanvas("c1","c1", s*1200, s*900);
@@ -97,7 +97,7 @@ int electron_spectrum(const char filename[20])
     spectrum -> SetStats(0);
     spectrum -> SetLineWidth(1);
     spectrum -> Draw("SAME HIST");
-    
+
     FILE *out_file = fopen("synch_e.txt", "w");
 
     fprintf(out_file, "Bin Center[eV], Counts/eV\n");
@@ -106,6 +106,6 @@ int electron_spectrum(const char filename[20])
     }
     fclose(out_file);
 
-  
+
     return 0;
 }

@@ -31,10 +31,6 @@ find_package(ROOT REQUIRED)
 #----------------------------------------------------------------------------
 # Locate sources and headers for this project
 #
-
-set(ROOT_INCLUDE_DIR "/opt/root/rootbuild/include")
-#set(ROOT_INCLUDE_DIR "~/Root/root_build/include")
-
 include_directories(${PROJECT_SOURCE_DIR}/include
                     ${Geant4_INCLUDE_DIR}
                     ${ROOT_INCLUDE_DIR})
