@@ -26,4 +26,4 @@
 /OutputFile proposal_sim
 
 # run
-/run/beamOn 100000000
+/run/beamOn 10000000

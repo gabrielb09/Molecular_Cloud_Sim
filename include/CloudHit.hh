@@ -37,6 +37,7 @@ class CloudHit : public G4VHit
     void SetPos      	    (G4ThreeVector xyz) { pos_ = xyz; };
     void SetTime      	  (G4double t)        { time_ = t; };
     void SetMomentum      (G4ThreeVector p)   { momentum_ = p; };
+    void SetCreatorProc   (G4String proc)     { creatorProc_ = proc; };
 
     G4int    GetParticleID ()   { return particleID_; };
     G4double GetEnergy     ()	  { return energy_; };
@@ -49,6 +50,7 @@ class CloudHit : public G4VHit
     G4ThreeVector pos_;
     G4double      time_;
     G4ThreeVector momentum_;
+    G4String      creatorProc_;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

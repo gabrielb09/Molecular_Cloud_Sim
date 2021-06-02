@@ -65,6 +65,8 @@ CloudRunAction::CloudRunAction()
   analysisManager -> CreateNtupleDColumn(3, "y");
   analysisManager -> CreateNtupleDColumn(3, "z");
 
+  analysisManager -> CreateNtupleSColumn(3, "creatorProcess");
+
   analysisManager -> FinishNtuple(3);
 
   // neutrinos (id = 4)

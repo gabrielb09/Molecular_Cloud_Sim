@@ -34,6 +34,7 @@ CloudHit::CloudHit(const CloudHit& right):
 	pos_						= right.pos_;
 	time_						= right.time_;
 	momentum_				= right.momentum_;
+	creatorProc_		= right.creatorProc_;
 
 }
 
@@ -46,6 +47,7 @@ const CloudHit& CloudHit::operator=(const CloudHit& right)
 	pos_						= right.pos_;
 	time_						= right.time_;
 	momentum_				= right.momentum_;
+	creatorProc_		= right.creatorProc_;
 
   return *this;
 }
@@ -66,7 +68,7 @@ void CloudHit::Draw()
     G4Colour colour(1.,0.,0.);
     G4VisAttributes attribs(colour);
     circle.SetVisAttributes(attribs);
-    pVVisManager->Draw(circle);
+    pVVisManager -> Draw(circle);
   }
 }
 
@@ -132,6 +134,8 @@ void CloudHit::fPrint()
 				analysisManager -> FillNtupleDColumn(3, 2, double(pos_.getX()/pc));
 				analysisManager -> FillNtupleDColumn(3, 3, double(pos_.getY()/pc));
 				analysisManager -> FillNtupleDColumn(3, 4, double(pos_.getZ()/pc));
+
+				analysisManager -> FillNtupleSColumn(3, 5, creatorProc_);
 
 				analysisManager -> AddNtupleRow(3);
 			}

@@ -48,6 +48,14 @@ G4bool CloudSD::ProcessHits(G4Step* step,G4TouchableHistory*)
   newHit -> SetCopyN(step -> GetPostStepPoint() -> GetTouchableHandle() -> GetCopyNumber());
   newHit -> SetEnergy(step -> GetPreStepPoint() -> GetKineticEnergy());
   newHit -> SetPos(step -> GetPostStepPoint() -> GetPosition());
+  newHit -> SetTime(step -> GetTrack() -> GetGlobalTime());
+  newHit -> SetMomentum(Step -> GetPostStepPoint() -> GetMomentum());
+  if (!(aStep -> GetTrack() -> GetCreatorProcess())){
+    newHit -> SetCreatorProc("N/A");
+  }
+  else{
+    newHit -> SetCreatorProc(step -> GetTrack() -> GetCreatorProcess() -> GetProcessName());
+  }
 
   DetectorCollection -> insert( newHit );
 
