@@ -154,9 +154,9 @@ void CloudConstruction::ConstructSDandField()
   }
 
   // Magnetic Field
-  G4TransportationManager::GetTransportationManager()->GetPropagatorInField()->SetLargestAcceptableStep(diameter*10.0);
+//  G4TransportationManager::GetTransportationManager()->GetPropagatorInField()->SetLargestAcceptableStep(diameter*10.0);
   // generate field
-  MagField = new CloudField(diameter);
+//  MagField = new CloudField(diameter);
 }
 
 void CloudConstruction::SetDiameter(G4double diam){
