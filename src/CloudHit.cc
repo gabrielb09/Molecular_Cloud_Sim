@@ -83,13 +83,6 @@ void CloudHit::fPrint()
 
 	auto analysisManager = G4AnalysisManager::Instance();
 
-	if (((copyN_ == -1) && (particleID_ == 22))||((particleID_ == 11) && (energy_/GeV >= 245.0))){
-		analysisManager -> FillNtupleIColumn(0, int(particleID_));
-		analysisManager -> FillNtupleIColumn(1, int(copyN_));
-		analysisManager -> FillNtupleDColumn(2, double(energy_/MeV));
-	  analysisManager -> AddNtupleRow();
-	}
-
 	switch(particleID_) {
 		case 22 : // photon
 			if (copyN_ == -1){ // if escaping the cloud
