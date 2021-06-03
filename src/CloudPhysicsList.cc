@@ -52,7 +52,7 @@ CloudPhysicsList::CloudPhysicsList():  G4VModularPhysicsList()
     // Neutron tracking cut
     RegisterPhysics( new G4NeutronTrackingCut(ver));
 
-    G4HadronicParameters::Instance()->SetEnableCRCoalescence( true );
+    //G4HadronicParameters::Instance()->SetEnableCRCoalescence( true );
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
