@@ -26,7 +26,7 @@ CloudPhysicsList::CloudPhysicsList():  G4VModularPhysicsList()
 
     G4int ver = 1;
     SetVerboseLevel(ver);
-    SetDefaultCutValue(2.0*pc);
+    SetDefaultCutValue(3.0*pc);
 
     // EM Physics
     RegisterPhysics( new G4EmStandardPhysics(ver) );
