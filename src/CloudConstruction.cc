@@ -136,7 +136,7 @@ G4VPhysicalVolume* CloudConstruction::Construct()
     LogicalCloud -> SetUserLimits(new G4UserLimits(maxStep = DBL_MAX,
                                                maxLength = DBL_MAX,
                                                maxTime = DBL_MAX,
-                                               minEkin = 1.0*TeV));
+                                               minEkin = 1.0*GeV));
 
 	return PhysicalWorld;
 }

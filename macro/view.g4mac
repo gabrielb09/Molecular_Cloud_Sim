@@ -1,8 +1,10 @@
 # initialize viewer settings
-/vis/open OGL 800x800
+/vis/open OGL 1200x800
 /vis/drawVolume
 /vis/viewer/set/style surface
 /vis/viewer/set/viewpointThetaPhi 0 0
+/vis/viewer/panTo -3.2 0 pc
+/vis/viewer/zoom 20
 
 # set tracking settings
 /tracking/storeTrajectory 1
@@ -11,14 +13,21 @@
 
 /vis/ogl/set/displayListLimit 1000000
 
+/OutputDirectory ../output
+/OutputFile viewer
+
+/vis/modeling/trajectories/create/drawByParticleID MyViewer
+/control/execute particles_off.g4mac
+/vis/modeling/trajectories/MyViewer/set proton blue
+/vis/modeling/trajectories/MyViewer/set electrons red
 # define general particle source
 
 # particle type
-/gps/particle e-
+/gps/particle proton
 
 # source geometry
 /gps/pos/type Point
-/gps/pos/centre 0 0 156492.0 km
+/gps/pos/centre 3.0 0 0 pc
 
 # source direction/angle
 /gps/ang/type focused
@@ -26,15 +35,15 @@
 
 # source energy distribution
 /gps/ene/type Pow
-/gps/ene/min 15 keV
-/gps/ene/max 1.0 MeV
-/gps/ene/alpha -1.39
+/gps/ene/min 99.99 TeV
+/gps/ene/max 100 TeV
+/gps/ene/alpha -2
 
 /run/verbose 1
 /tracking/verbose 1
 /event/verbose 0
 
-/run/beamOn 500
+/run/beamOn 1
 
 
 /vis/viewer/rebuild

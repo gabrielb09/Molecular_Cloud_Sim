@@ -131,6 +131,8 @@ void CloudHit::fPrint()
 				analysisManager -> FillNtupleSColumn(3, 5, creatorProc_);
 
 				analysisManager -> AddNtupleRow(3);
+
+
 			}
 			break;
 		case 12 : // electron neutrino
@@ -148,9 +150,7 @@ void CloudHit::fPrint()
 			}
 			break;
 		case 2212 : // protons
-			if (copyN_ == -1){
-				analysisManager -> FillNtupleDColumn(5, 0, double(energy_/MeV));
-			}
+			analysisManager -> FillNtupleDColumn(5, 0, double(energy_/MeV));
 			break;
 		default : // others
 			if (copyN_ == -1){

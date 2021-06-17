@@ -17,6 +17,7 @@
 
 #include "G4HadronPhysicsQGSP_BERT.hh"
 #include "G4SystemOfUnits.hh"
+#include "G4UserSpecialCuts.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 CloudPhysicsList::CloudPhysicsList():  G4VModularPhysicsList()

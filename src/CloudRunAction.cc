@@ -86,6 +86,11 @@ CloudRunAction::CloudRunAction()
 
   analysisManager -> CreateNtupleDColumn(5, "energy");
 
+  analysisManager -> CreateNtupleDColumn(5, "t");
+  analysisManager -> CreateNtupleDColumn(5, "x");
+  analysisManager -> CreateNtupleDColumn(5, "y");
+  analysisManager -> CreateNtupleDColumn(5, "z");
+
   analysisManager -> FinishNtuple(5);
 
   // other (id = 6)
